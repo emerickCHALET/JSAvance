@@ -18,10 +18,11 @@ export default class Routing extends React.Component {
         super(props);
         this.state = {
             value: ''
-        }
+        };
+        this._getName = this._getName.bind(this);
     }
 
-    _getName = (e) => {
+    _getName(e){
         console.log(e);
         this.setState({...this.state, value: e});
     };

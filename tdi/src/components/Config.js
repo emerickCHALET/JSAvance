@@ -19,6 +19,6 @@ export default class Config extends React.Component {
               <input type='text'/>
               <button>Submit</button>
             </form>
-          );
+        );
     }
 }

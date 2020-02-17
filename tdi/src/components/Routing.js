@@ -13,20 +13,18 @@ import About from './About';
 
 export default class Routing extends React.Component {
 
-    // eslint-disable-next-line no-useless-constructor
     constructor(props) {
         super(props);
         this.state = {
             value: ''
-        }
+        };
+        this._getName = this._getName.bind(this);
     }
 
-    _getName = (e) => {
+    _getName(e){
         console.log(e);
         this.setState({...this.state, value: e});
     };
-
-
 
     render() {
         return (

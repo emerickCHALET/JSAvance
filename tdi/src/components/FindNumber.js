@@ -4,14 +4,15 @@ export default class FindNumber extends React.Component {
 
     constructor(props) {
         super(props);
-        this.randomNumber = 0;
+        this.randomNumber = this._generateNumber();
         this.number = 0;
         this.turn = 1;
     }
 
     _generateNumber(){
-        this.randomNumber = Math.floor(Math.random() * 100);
-        console.log(this.randomNumber);
+        let rdNumber = Math.floor(Math.random() * 100);
+        console.log(rdNumber);
+        return rdNumber;
     }
 
     _submitNumber(event) {
@@ -24,6 +25,8 @@ export default class FindNumber extends React.Component {
     _restartGame(event) {
         event.preventDefault();
         console.log("Perdu");
+        this.randomNumber = this._generateNumber();
+        this.turn = 0;
     }
 
     _checkNumberValid(value){
@@ -39,6 +42,8 @@ export default class FindNumber extends React.Component {
         else{
             console.log("Gagné");
             console.log(this.turn);
+            this.randomNumber = this._generateNumber();
+            this.turn = 0;
         }
 
     }
@@ -46,7 +51,6 @@ export default class FindNumber extends React.Component {
     render() {
         return (
             <div>
-                {this._generateNumber()}
                 <h2> Find the random number </h2>
                 <form onSubmit = {event => this._submitNumber(event)}>
                     <input type='number'/>

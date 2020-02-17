@@ -10,6 +10,7 @@ import {
 import Home from './Home';
 import Config from './Config';
 import About from './About';
+import FindNumber from "./FindNumber";
 
 export default class Routing extends React.Component {
 
@@ -18,7 +19,6 @@ export default class Routing extends React.Component {
         this.state = {
             value: ''
         };
-        this._getName = this._getName.bind(this);
     }
 
     _getName(e){
@@ -41,6 +41,9 @@ export default class Routing extends React.Component {
                             <li>
                                 <Link to="/Config">Config</Link>
                             </li>
+                            <li>
+                                <Link to="/FindNumber">Find the Number</Link>
+                            </li>
                         </ul>
                     </nav>
 
@@ -54,7 +57,10 @@ export default class Routing extends React.Component {
                             <About/>
                         </Route>
                         <Route path="/Config">
-                            <Config name={this._getName}/>
+                            <Config name={(e) => this._getName(e)}/>
+                        </Route>
+                        <Route path="/FindNumber">
+                            <FindNumber/>
                         </Route>
                     </Switch>
                 </div>

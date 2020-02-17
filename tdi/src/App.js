@@ -33,13 +33,13 @@ function App() {
               renders the first one that matches the current URL. */}
           <Switch>
             <Route exact path="/">
-              <Home />
+              <Home name = "lll" />
             </Route>
             <Route path="/about">
               <About />
             </Route>
             <Route path="/Config">
-              <Config />
+              <Config/>
             </Route>
           </Switch>
         </div>

@@ -6,7 +6,7 @@ export default class Home extends React.Component {
             <div>
             <h2> Home </h2>
       
-            <p> HELLO {name} </p>
+            <p> HELLO {this.props.name} </p>
             </div>
           );
     }

@@ -8,8 +8,9 @@ export default class Config extends React.Component {
     
     submit(event) {
         event.preventDefault();
-        console.log(event.target[0].value);
         this.name = event.target[0].value;
+        console.log(this.name);
+        this.props.name(this.name);
     }
 
     render() {

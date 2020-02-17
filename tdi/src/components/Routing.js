@@ -16,11 +16,16 @@ export default class Routing extends React.Component {
     // eslint-disable-next-line no-useless-constructor
     constructor(props) {
         super(props);
+        this.state = {
+            value: ''
+        }
     }
 
-    setName() {
-        return this.props.name;
-    }
+    _getName = (e) => {
+        console.log(e);
+        this.setState({...this.state, value: e});
+    };
+
 
 
     render() {
@@ -45,13 +50,13 @@ export default class Routing extends React.Component {
                         renders the first one that matches the current URL. */}
                     <Switch>
                         <Route exact path="/">
-                            <Home name={this.setName()}/>
+                            <Home name={this.state.value}/>
                         </Route>
                         <Route path="/about">
                             <About/>
                         </Route>
                         <Route path="/Config">
-                            <Config/>
+                            <Config name={this._getName}/>
                         </Route>
                     </Switch>
                 </div>

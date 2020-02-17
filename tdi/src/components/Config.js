@@ -16,7 +16,6 @@ export default class Config extends React.Component {
     render() {
         return (
             <div>
-            <p>Nom : {this.props.name}</p>
             <form onSubmit = {event => this.submit(event)}>
               <input type='text'></input>
               <button>Submit</button>

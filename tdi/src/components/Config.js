@@ -1,8 +1,8 @@
 import React from 'react';
 export default class Config extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.name = '';
     }
     
@@ -15,11 +15,9 @@ export default class Config extends React.Component {
     render() {
         return (
             <form onSubmit = {event => this.submit(event)}>
-              <input type='text'></input>
+              <input type='text'/>
               <button>Submit</button>
             </form>
           );
     }
-
-
 }

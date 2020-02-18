@@ -11,24 +11,8 @@ import Home from './Home';
 import Config from './Config';
 import About from './About';
 import FindNumber from "./FindNumber";
-import { connect } from 'react-redux';
 
-class Routing extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: ''
-        };
-    }
-
-    _getName(e){
-        //console.log(e);
-        //this.setState({...this.state, value: e});
-        const action = { type: "GET_USER", value: e};
-        this.props.dispatch(action);
-    };
-
+export default class Routing extends React.Component {
     render() {
         return (
             <Router>
@@ -54,16 +38,16 @@ class Routing extends React.Component {
                         renders the first one that matches the current URL. */}
                     <Switch>
                         <Route exact path="/">
-                            <Home name={this.props.users}/>
+                            <Home name='test'/>
                         </Route>
                         <Route path="/about">
                             <About/>
                         </Route>
                         <Route path="/Config">
-                            <Config name={(e) => this._getName(e)}/>
+                            <Config />
                         </Route>
                         <Route path="/FindNumber">
-                            <FindNumber/>
+                            <FindNumber />
                         </Route>
                     </Switch>
                 </div>
@@ -71,11 +55,3 @@ class Routing extends React.Component {
         );
     }
 }
-
-const mapStateToProps = state => {
-    return {
-        users: state.users
-    }
-};
-
-export default connect(mapStateToProps)(Routing)

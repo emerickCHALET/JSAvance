@@ -1,12 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { addScore} from "../Store/Reducers/action";
 
-export default class FindNumber extends React.Component {
+
+class FindNumber extends React.Component {
 
     constructor(props) {
         super(props);
         this.randomNumber = this._generateNumber();
         this.number = 0;
         this.turn = 1;
+        this.status = false;
+    }
+
+    addScore() {
+        this.props.addScore({
+            name: this.props.name,
+            number: this.number,
+            turn: this.turn
+        });
     }
 
     _generateNumber(){
@@ -25,8 +37,9 @@ export default class FindNumber extends React.Component {
     _restartGame(event) {
         event.preventDefault();
         console.log("Perdu");
-        this.randomNumber = this._generateNumber();
-        this.turn = 0;
+
+        /* this.randomNumber = this._generateNumber();
+        this.turn = 0; */
     }
 
     _checkNumberValid(value){
@@ -41,11 +54,15 @@ export default class FindNumber extends React.Component {
         }
         else{
             console.log("Gagné");
+            console.log(this.props.name);
             console.log(this.turn);
-            this.randomNumber = this._generateNumber();
-            this.turn = 0;
-        }
+            console.log(this.number);
+            this.status = true;
+            this.addScore();
 
+            /* this.randomNumber = this._generateNumber();
+            this.turn = 0; */
+        }
     }
 
     render() {
@@ -61,3 +78,21 @@ export default class FindNumber extends React.Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        scores: state.scores,
+        users: state.users
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addScore: score => {
+            dispatch(addScore(score))
+        }
+    };
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(FindNumber)

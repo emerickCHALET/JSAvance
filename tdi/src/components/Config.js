@@ -1,24 +1,33 @@
 import React from 'react';
-export default class Config extends React.Component {
+import {addUser} from "../Store/Reducers/action";
+import {connect} from "react-redux";
 
-    constructor(props) {
-        super(props);
-        this.name = '';
-    }
-    
-    submit(event) {
+
+class Config extends React.Component {
+    addUser(event) {
         event.preventDefault();
-        this.name = event.target[0].value;
-        console.log(this.name);
-        this.props.name(this.name);
+        let name = event.target[0].value;
+        console.log(name);
+        this.props.addUser(name);
     }
 
     render() {
         return (
-            <form onSubmit = {event => this.submit(event)}>
+            <form onSubmit = {event => this.addUser(event)}>
               <input type='text'/>
               <button>Submit</button>
             </form>
         );
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addUser: users => {
+            dispatch(addUser(users))
+        }
+    };
+};
+
+
+export default connect(null, mapDispatchToProps)(Config)

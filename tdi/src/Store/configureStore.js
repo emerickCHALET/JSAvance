@@ -1,4 +1,4 @@
 import { createStore } from 'redux';
-import getUsers from './Reducers/getUsers'
+import Game from './Reducers/game';
 
-export default createStore(getUsers);
+export default createStore(Game);

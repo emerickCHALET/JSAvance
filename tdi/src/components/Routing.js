@@ -14,13 +14,11 @@ import FindNumber from './FindNumber';
 
 export default class Routing extends React.Component {
 
-    // eslint-disable-next-line no-useless-constructor
     constructor(props) {
         super(props);
-    }
-
-    setName() {
-        return this.props.name;
+        this.state ={
+            value: ''
+        };
     }
 
     render() {
@@ -48,13 +46,13 @@ export default class Routing extends React.Component {
                         renders the first one that matches the current URL. */}
                     <Switch>
                         <Route exact path="/">
-                            <Home name={this.setName()}/>
+                            <Home name={this.props.users}/>
                         </Route>
                         <Route path="/about">
                             <About/>
                         </Route>
                         <Route path="/Config">
-                            <Config/>
+                            <Config name={(e) => this._getName(e)}/>
                         </Route>
                         <Route path="/FindNumber">
                             <FindNumber/>

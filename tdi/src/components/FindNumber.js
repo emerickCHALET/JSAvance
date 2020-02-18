@@ -15,7 +15,7 @@ class FindNumber extends React.Component {
 
     addScore() {
         this.props.addScore({
-            name: this.props.name,
+            name: this.props.users,
             number: this.number,
             turn: this.turn
         });
@@ -37,6 +37,8 @@ class FindNumber extends React.Component {
     _restartGame(event) {
         event.preventDefault();
         console.log("Perdu");
+        this.turn = -1;
+        this.addScore();
 
         /* this.randomNumber = this._generateNumber();
         this.turn = 0; */
@@ -54,9 +56,6 @@ class FindNumber extends React.Component {
         }
         else{
             console.log("Gagné");
-            console.log(this.props.name);
-            console.log(this.turn);
-            console.log(this.number);
             this.status = true;
             this.addScore();
 

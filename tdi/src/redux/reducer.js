@@ -21,7 +21,6 @@ export default function Game(state = initialState, action) {
     let nextState;
 
     switch (action.type) {
-
         case ADD_SCORE:
             return {...state, scores: [...state.scores, action.score]};
 
@@ -31,7 +30,6 @@ export default function Game(state = initialState, action) {
                 ...state,
                 users: action.value
             };
-
             return nextState || state;
 
         default:

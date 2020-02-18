@@ -8,7 +8,7 @@ class Score extends React.Component {
         const { scores } = this.props;
 
         return (
-            <table className="style"><thead><tr><th>Nom</th><th>Number</th><th>Turn</th></tr></thead><tbody>
+            <table className="style"><thead><tr><th>Name</th><th>Number</th><th>Attempts</th></tr></thead><tbody>
             {scores.map((score,index) => {
                 return (
                     <tr key={index}>

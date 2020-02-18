@@ -9,9 +9,9 @@ class Score extends React.Component {
 
         return (
             <table className="style"><thead><tr><th>Nom</th><th>Number</th><th>Turn</th></tr></thead><tbody>
-            {scores.map((score) => {
+            {scores.map((score,index) => {
                 return (
-                    <tr>
+                    <tr key={index}>
                         <td>{score.name}</td>
                         <td>{score.number}</td>
                         <td>{score.turn}</td>

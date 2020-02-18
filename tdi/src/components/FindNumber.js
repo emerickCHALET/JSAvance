@@ -11,6 +11,10 @@ class FindNumber extends React.Component {
         this.number = 0;
         this.turn = 1;
         this.status = false;
+
+        this.state = {
+            context: ""
+        }
     }
 
     addScore() {
@@ -36,6 +40,7 @@ class FindNumber extends React.Component {
 
     _restartGame(event) {
         event.preventDefault();
+        this.setState({...this.state, context: "Perdu"});
         console.log("Perdu");
         this.turn = -1;
         this.addScore();
@@ -47,14 +52,17 @@ class FindNumber extends React.Component {
     _checkNumberValid(value){
 
         if(value < this.randomNumber){
+            this.setState({...this.state, context: "C'est plus grand"});
             console.log("C'est plus grand");
             console.log(this.turn);
         }
         else if(value > this.randomNumber){
+            this.setState({...this.state, context: "C'est plus petit"});
             console.log("C'est plus petit");
             console.log(this.turn);
         }
         else{
+            this.setState({...this.state, context: "Gagné"});
             console.log("Gagné");
             this.status = true;
             this.addScore();
@@ -73,6 +81,8 @@ class FindNumber extends React.Component {
                     <button>Submit</button>
                 </form>
                 <button onClick={event => this._restartGame(event)}>Recommencer</button>
+                <br/>
+                <p>{this.state.context}</p>
             </div>
         );
     }

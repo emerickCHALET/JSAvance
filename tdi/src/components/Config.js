@@ -1,26 +1,22 @@
 import React from 'react';
-import {getUsers} from "../redux/actions";
 import {connect} from "react-redux";
+
+import {addUser} from "../redux/actions";
 
 
 class Config extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.name = '';
-    }
-
-    getUser(event) {
+    addUser(event) {
         event.preventDefault();
         let name = event.target[0].value;
         console.log(event.target[0].value);
-        this.props.getUsers(name)
+        this.props.addUser(name)
     }
 
     render() {
         return (
             <div>
-            <form onSubmit = {event => this.getUsers(event)}>
+            <form onSubmit = {event => this.addUser(event)}>
               <input type='text'></input>
               <button>Submit</button>
             </form>
@@ -32,7 +28,7 @@ class Config extends React.Component {
 const mapDispatchToProps = dispatch => {
     return {
         addUser: users => {
-            dispatch(getUsers(users))
+            dispatch(addUser(users))
         }
     };
 };

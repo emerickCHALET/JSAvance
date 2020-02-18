@@ -1,6 +1,6 @@
 import {
     ADD_SCORE,
-    GET_USERS
+    ADD_USER
 } from './actions';
 
 const initialState = {
@@ -25,7 +25,7 @@ export default function Game(state = initialState, action) {
         case ADD_SCORE:
             return {...state, scores: [...state.scores, action.score]};
 
-        case GET_USERS:
+        case ADD_USER:
             // Le User n'est pas dans la liste, on l'ajoute.
             nextState = {
                 ...state,

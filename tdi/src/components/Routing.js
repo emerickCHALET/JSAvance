@@ -10,22 +10,9 @@ import {
 import Home from './Home';
 import Config from './Config';
 import About from './About';
+import FindNumber from "./FindNumber";
 
 export default class Routing extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: ''
-        };
-        this._getName = this._getName.bind(this);
-    }
-    
-    _getName(e) {
-        console.log(e);
-        this.setState({...this.state, value: e});
-    };
-
     render() {
         return (
             <Router>
@@ -41,6 +28,9 @@ export default class Routing extends React.Component {
                             <li>
                                 <Link to="/Config">Config</Link>
                             </li>
+                            <li>
+                                <Link to="/FindNumber">Find the Number</Link>
+                            </li>
                         </ul>
                     </nav>
 
@@ -48,13 +38,16 @@ export default class Routing extends React.Component {
                         renders the first one that matches the current URL. */}
                     <Switch>
                         <Route exact path="/">
-                            <Home name={this.state.value}/>
+                            <Home name='test'/>
                         </Route>
                         <Route path="/about">
                             <About/>
                         </Route>
                         <Route path="/Config">
-                            <Config name={this._getName}/>
+                            <Config />
+                        </Route>
+                        <Route path="/FindNumber">
+                            <FindNumber />
                         </Route>
                     </Switch>
                 </div>

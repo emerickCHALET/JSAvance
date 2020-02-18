@@ -22,13 +22,15 @@ export default function Game(state = initialState, action) {
 
     switch (action.type) {
         case ADD_SCORE:
-            return {...state, scores: [...state.scores, action.score]};
+
+            nextState = {...state, scores: [...state.scores, action.score]}
+
+            return nextState || state;
 
         case ADD_USER:
-            // Le User n'est pas dans la liste, on l'ajoute.
             nextState = {
                 ...state,
-                users: action.value
+                users: action.name
             };
             return nextState || state;
 

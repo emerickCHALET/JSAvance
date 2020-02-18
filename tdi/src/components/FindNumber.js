@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addScore} from "../redux/actions";
 
+
+import 'firebase/firestore';
+
 class FindNumber extends React.Component {
 
     constructor(props) {

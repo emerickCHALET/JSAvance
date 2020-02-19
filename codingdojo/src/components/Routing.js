@@ -38,7 +38,7 @@ export default class Routing extends React.Component {
                         renders the first one that matches the current URL. */}
                     <Switch>
                         <Route exact path="/">
-                            <Home name='test'/>
+                            <Home names='test'/>
                         </Route>
                         <Route path="/About">
                             <About/>

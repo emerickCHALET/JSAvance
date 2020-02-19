@@ -4,15 +4,22 @@ import { connect } from 'react-redux';
 
 class Home extends React.Component {
 
+    addUser(event) {
+        event.preventDefault();
+        let name = event.target[0].value;
+        console.log(name);
+        this.props.addUser(name);
+    }
+
     render() {
         return (
             <div>
                 <h2>Welcome</h2>
-                <form>
+                <form onSubmit = {event => this.addUser(event)}>
                     <input type="text"></input>
                     <button>Submit</button>
                 </form>
-                <p> Hello {this.props.users} </p>
+                <p> Hello {this.props.name} </p>
                 <h2>Rules of the game</h2>
                 <p>The rules of this game are simple.</p>
                 <p>During 30 sec , you will see many case in red an others in black. You need to remember where are the red cases.</p>
@@ -24,6 +31,7 @@ class Home extends React.Component {
         );
     }
 }
+
 
 const mapStateToProps = state => {
     return {

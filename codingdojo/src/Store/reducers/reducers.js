@@ -17,7 +17,7 @@ const initialState = {
 };
 
 export default function Game(state = initialState, action) {
-    console.log('reducer', action.type);
+    console.log('reducers', action.type);
 
     let nextState;
 

@@ -41,7 +41,6 @@
   background-color: yellow;
 }
 
-
 .red {
   background-color: red;
 }
@@ -53,4 +52,8 @@
 td {
   width:20px;
   height: 20px;
+}
+
+table {
+  align-content: center;
 }

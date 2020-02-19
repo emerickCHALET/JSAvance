@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import Home from './Home';
-import Scoreboard from './Scoreboard';
+import Scoreboard from './Scoreboard'
 import About from './About';
 import Board from './Board';
 
@@ -38,7 +38,7 @@ export default class Routing extends React.Component {
                                 </li>
                             }
                             <li>
-                                <Link to="/Scoreboard">Score Board</Link>
+                                <Link to="/Scoreboard">Scoreboard</Link>
                             </li>
                         </ul>
                     </nav>
@@ -47,7 +47,7 @@ export default class Routing extends React.Component {
                         renders the first one that matches the current URL. */}
                     <Switch>
                         <Route exact path="/">
-                            <Home name='test'/>
+                            <Home/>
                         </Route>
                         <Route path="/About">
                             <About/>

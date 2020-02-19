@@ -1,26 +1,15 @@
-import React from "react";
-
-import {connect} from "react-redux";
-import 'firebase/firestore';
+import React from 'react';
+import {connect} from 'react-redux';
 
 class Scoreboard extends React.Component {
+    constructor(props) {
+        super(props);
+    }
 
     render() {
-        const { scores } = this.props;
-
         return (
-            <table className="style"><thead><tr><th>Nom</th><th>Number</th><th>Turn</th></tr></thead><tbody>
-            {scores.map((score,index) => {
-                return (
-                    <tr key={index}>
-                        <td>{score.name}</td>
-                        <td>{score.number}</td>
-                        <td>{score.turn}</td>
-                    </tr>
-                );
-            })}
-            </tbody></table>
-        );
+            <p> en construction </p>
+        )
     }
 }
 
@@ -28,6 +17,6 @@ const mapStateToProps = state => {
     return {
         scores: state.scores
     }
-};
+}
 
 export default connect(mapStateToProps)(Scoreboard)

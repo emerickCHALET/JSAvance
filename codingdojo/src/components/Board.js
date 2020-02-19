@@ -42,7 +42,7 @@ class Board extends React.Component {
     _generateTable(level) {
         switch (level) {
             case "EASY":
-                this.width = 8;
+                this.width = 5;
                 break;
             case "MEDIUM":
                 this.width = 12;
@@ -51,7 +51,7 @@ class Board extends React.Component {
                 this.width = 20;
                 break;
             default:
-                this.width = 8;
+                this.width = 4;
                 break;
         }
 
@@ -67,7 +67,7 @@ class Board extends React.Component {
                 }
             }
             tab.push(line);
-        }
+    }
         console.log('tab', tab);
         return tab;
     }
@@ -78,20 +78,43 @@ class Board extends React.Component {
     }
 
 
+    /*
+    * TO DO : timer
+    *   - Start timer for memorization (e.g. : 10s easy, 7s medium, 5s hard)
+    *   - Start timer when game start ???
+    */
+
+    _timer() {
+
+    }
+
+    /*
+    * TO DO : add score
+    * 
+    * 
+    */
+
+    addScore(){
+        this.props.addScore({
+            name: this.props.users,
+
+        })
+    }
 
     render() {
         const {ex1} = this.state;
         return (
             <div>
-            <p> Hello  </p>
-                <br /> <br /> <br />
+            <h2> Welcome {this.props.users} </h2>
+            <p> Choose your level</p>
             <select id="level" onChange = {event => this._startGame(event)}>
-                <option value="EASY">Easy</option>
-                <option value="MEDIUM">Medium</option>
-                <option value="HARD">Hard</option>
+                <option value="EASY">Easy - 4x4</option>
+                <option value="MEDIUM">Medium - 12x12</option>
+                <option value="HARD">Hard - 20x20</option>
             </select>
-                <br /><br /><br />
-                <table><tbody>
+            <p> You have 00:00 to memorize</p>
+               
+                <table align="center"><tbody>
                 {ex1.map((line, i) => (
                     <tr key={i}>
                         {line.map((row, i) => (
@@ -101,12 +124,14 @@ class Board extends React.Component {
                 ))}
                 </tbody></table>
             </div>
+
+
         )
     }
 }
-
 const mapStateToProps = state => {
     return {
+        users: state.users,
         scores: state.scores
     }
 };

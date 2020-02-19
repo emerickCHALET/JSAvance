@@ -1,6 +1,7 @@
 import React from "react";
 
 import {connect} from "react-redux";
+import 'firebase/firestore';
 
 class Score extends React.Component {
 

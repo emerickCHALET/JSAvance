@@ -4,6 +4,8 @@ import {
     ADD_SCORE,
     ADD_USER
 } from './action';
+import StoreScore from '../../firebase/StoreScore';
+
 
 const initialState = {
     /**
@@ -56,6 +58,12 @@ export default function Game(state = initialState, action) {
             if(newState.scores.length > 5){
                 newState.scores.pop();
             }
+
+            newState.scores.map((score) =>
+                {
+                    return StoreScore(score.name, score.number, score.turn);
+                });
+
 
             return newState;
 

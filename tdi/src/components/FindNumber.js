@@ -10,7 +10,6 @@ class FindNumber extends React.Component {
         this.randomNumber = this._generateNumber();
         this.number = 0;
         this.turn = 1;
-        this.status = false;
 
         this.state = {
             context: ""
@@ -64,7 +63,6 @@ class FindNumber extends React.Component {
         else{
             this.setState({...this.state, context: "Gagné"});
             console.log("Gagné");
-            this.status = true;
             this.addScore();
 
             /* this.randomNumber = this._generateNumber();

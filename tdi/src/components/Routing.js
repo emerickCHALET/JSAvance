@@ -10,6 +10,7 @@ import {
 import Home from './Home';
 import Config from './Config';
 import About from './About';
+import Score from './Score';
 import FindNumber from "./FindNumber";
 
 export default class Routing extends React.Component {
@@ -31,6 +32,9 @@ export default class Routing extends React.Component {
                             <li>
                                 <Link to="/FindNumber">Find the Number</Link>
                             </li>
+                            <li>
+                                <Link to="/Score">Score View</Link>
+                            </li>
                         </ul>
                     </nav>
 
@@ -48,6 +52,9 @@ export default class Routing extends React.Component {
                         </Route>
                         <Route path="/FindNumber">
                             <FindNumber />
+                        </Route>
+                        <Route path="/Score">
+                            <Score />
                         </Route>
                     </Switch>
                 </div>

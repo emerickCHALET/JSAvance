@@ -10,12 +10,15 @@ class FindNumber extends React.Component {
         this.randomNumber = this._generateNumber();
         this.number = 0;
         this.turn = 1;
-        this.status = false;
+
+        this.state = {
+            context: ""
+        }
     }
 
     addScore() {
         this.props.addScore({
-            name: this.props.name,
+            name: this.props.users,
             number: this.number,
             turn: this.turn
         });
@@ -36,32 +39,34 @@ class FindNumber extends React.Component {
 
     _restartGame(event) {
         event.preventDefault();
+        this.setState({...this.state, context: "Perdu"});
         console.log("Perdu");
+        this.turn = -1;
+        this.addScore();
 
-        /* this.randomNumber = this._generateNumber();
-        this.turn = 0; */
+        this.randomNumber = this._generateNumber();
+        this.turn = 1;
     }
 
     _checkNumberValid(value){
 
         if(value < this.randomNumber){
+            this.setState({...this.state, context: "C'est plus grand"});
             console.log("C'est plus grand");
             console.log(this.turn);
         }
         else if(value > this.randomNumber){
+            this.setState({...this.state, context: "C'est plus petit"});
             console.log("C'est plus petit");
             console.log(this.turn);
         }
         else{
+            this.setState({...this.state, context: "Gagné"});
             console.log("Gagné");
-            console.log(this.props.name);
-            console.log(this.turn);
-            console.log(this.number);
-            this.status = true;
             this.addScore();
 
-            /* this.randomNumber = this._generateNumber();
-            this.turn = 0; */
+            this.randomNumber = this._generateNumber();
+            this.turn = 1;
         }
     }
 
@@ -74,6 +79,8 @@ class FindNumber extends React.Component {
                     <button>Submit</button>
                 </form>
                 <button onClick={event => this._restartGame(event)}>Recommencer</button>
+                <br/>
+                <p>{this.state.context}</p>
             </div>
         );
     }

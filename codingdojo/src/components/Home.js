@@ -2,30 +2,34 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 
-export default class Home extends React.Component {
+class Home extends React.Component {
 
     render() {
         return (
             <div>
-                <h2> Home </h2>
+                <h2>Welcome</h2>
                 <form>
                     <input type="text"></input>
                     <button>Submit</button>
                 </form>
-                <p> HELLO {this.props.users} </p>
+                <p> Hello {this.props.users} </p>
+                <h2>Rules of the game</h2>
+                <p>The rules of this game are simple.</p>
+                <p>During 30 sec , you will see many case in red an others in black. You need to remember where are the red cases.</p>
+                <p>After this time, your goal will be to click where the red case were. If you succeed, you won and will have a new board with a new game and you take 1 points.</p>
+                <p>If you loose, the game restart but your score will be added to the board of results and you will can see your classment.</p>
+                <p>!!!Don't forgot to enter your Name!!!</p>
+                <p>Good Luck.</p>
             </div>
         );
     }
 }
 
-/*
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
     return {
-        addUser: users => {
-            dispatch(addUser(users))
-        }
-    };
+        users: state.users
+    }
 };
 
+export default connect(mapStateToProps)(Home)
 
-export default connect(null, mapDispatchToProps)(Config)*/

@@ -10,10 +10,17 @@ import {
 import Home from './Home';
 import Scoreboard from './Scoreboard';
 import About from './About';
-import Gameboard from './Gameboard';
+import Board from './Board';
 
 export default class Routing extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.test = true;
+    }
+
     render() {
+
         return (
             <Router>
                 <div>
@@ -25,9 +32,11 @@ export default class Routing extends React.Component {
                             <li>
                                 <Link to="/about">About</Link>
                             </li>
-                            <li>
-                                <Link to="/Gameboard">Enter game</Link>
-                            </li>
+                            {this.test &&
+                                <li>
+                                    <Link to="/Board">Enter game</Link>
+                                </li>
+                            }
                             <li>
                                 <Link to="/Scoreboard">Score Board</Link>
                             </li>
@@ -43,8 +52,8 @@ export default class Routing extends React.Component {
                         <Route path="/About">
                             <About/>
                         </Route>
-                        <Route path="/Gameboard">
-                            <Gameboard />
+                        <Route path="/Board">
+                            <Board />
                         </Route>
                         <Route path="/Scoreboard">
                             <Scoreboard />

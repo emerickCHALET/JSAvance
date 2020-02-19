@@ -3,7 +3,7 @@ import React from "react";
 import {connect} from "react-redux";
 import 'firebase/firestore';
 
-class Score extends React.Component {
+class Scoreboard extends React.Component {
 
     render() {
         const { scores } = this.props;
@@ -30,4 +30,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps)(Score)
+export default connect(mapStateToProps)(Scoreboard)

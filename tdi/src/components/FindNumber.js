@@ -44,8 +44,8 @@ class FindNumber extends React.Component {
         this.turn = -1;
         this.addScore();
 
-        /* this.randomNumber = this._generateNumber();
-        this.turn = 0; */
+        this.randomNumber = this._generateNumber();
+        this.turn = 1;
     }
 
     _checkNumberValid(value){
@@ -65,8 +65,8 @@ class FindNumber extends React.Component {
             console.log("Gagné");
             this.addScore();
 
-            /* this.randomNumber = this._generateNumber();
-            this.turn = 0; */
+            this.randomNumber = this._generateNumber();
+            this.turn = 1;
         }
     }
 

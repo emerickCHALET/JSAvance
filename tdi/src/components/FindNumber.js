@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addScore} from "../Store/Reducers/action";
 
-
 class FindNumber extends React.Component {
 
     constructor(props) {

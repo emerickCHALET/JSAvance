@@ -11,7 +11,9 @@ class Board extends React.Component {
             [true, true, false, false, false],
             [false, true, true, false, false]
         ] */
-        this.ex1 = [];
+        this.state = {
+            ex1: []
+        }
     }
 
     /* createTab() {
@@ -72,19 +74,19 @@ class Board extends React.Component {
 
    _startGame(event){
         event.preventDefault();
-        this.ex1 = this._generateTable(this._selectLevel());
+        this.setState({...this.state , ex1 : this._generateTable(this._selectLevel())});
     }
 
 
 
     render() {
-        const {ex1} = this;
+        const {ex1} = this.state;
         return (
             <div>
             <p> Hello  </p>
                 <br /> <br /> <br />
             <select id="level" onChange = {event => this._startGame(event)}>
-                <option selected value="EASY">Easy</option>
+                <option value="EASY">Easy</option>
                 <option value="MEDIUM">Medium</option>
                 <option value="HARD">Hard</option>
             </select>

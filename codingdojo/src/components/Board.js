@@ -38,32 +38,22 @@ class Board extends React.Component {
                 break;
         }
 
-        let caseToFind = this._caseToFind(this.toFind, 0, this.width);
+        let caseToFind = this._caseToFind(this.toFind, 0, this.width * this.width);
 
         let tab = [];
         for(let i = 0, n = this.width; i < n ; i++) {
             let line = [];
             for(let i = 0, n = this.width; i < n ; i++) {
-                /*for (let i = 0; i < this.toFind +1; i++){
-                    if (random === 1) {
-                        line.push(true);
-                    }
-                    else{
-                        line.push(false);
-                    }
-                } */
-                for (let e = 0; e < caseToFind.length; e++) {
+                let random = Math.floor(Math.random() * caseToFind.length);
+                if (random === 1) {
                     line.push(true);
                 }
-
-                line.push(false);
+                else{
+                    line.push(false);
+                }
             }
-
             tab.push(line);
-    }
-
-
-
+        }
         console.log('tab', tab);
         return tab;
     }
@@ -82,7 +72,7 @@ class Board extends React.Component {
             max = Math.floor(max);
             let minRow = Math.floor(Math.random() * (max - min)) + min;
             let minCol = Math.floor(Math.random() * (max - min)) + min;
-            while (caseToFind.indexOf(minRow + "." + minCol) !== -1 && caseToFind.length < number) {
+            while (caseToFind.indexOf(minRow + minCol) !== -1 && caseToFind.length < number) {
                 minRow = Math.floor(Math.random() * (max - min)) + min;
                 minCol = Math.floor(Math.random() * (max - min)) + min;
             }

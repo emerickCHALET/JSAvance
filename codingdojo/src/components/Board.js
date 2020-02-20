@@ -103,6 +103,7 @@ class Board extends React.Component {
             // Tu as gagné
             console.log("Tu as gagné");
             this.win += 1;
+            this.addScore();
 
             // call aux scores en envoyant win + level + name du player
         }

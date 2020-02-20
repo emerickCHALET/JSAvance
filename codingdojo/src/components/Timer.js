@@ -11,7 +11,6 @@ class Timer extends React.Component {
             seconds: 1,
             finish: false
         };
-
         this.baseState = this.state;
 
     }

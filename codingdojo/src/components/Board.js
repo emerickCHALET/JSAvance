@@ -71,10 +71,8 @@ class Board extends React.Component {
 
     static getDerivedStateFromProps(props, state){
         if (state.timer !== props.timers) {
-            console.log("State : " + state.timer);
-            console.log("Props : " + props.timers);
             return {
-                timer: props.timer,
+                timer: true,
             }
         }
         return {
@@ -82,7 +80,7 @@ class Board extends React.Component {
         }
     }
 
-   _startGame(event){
+    _startGame(event){
         event.preventDefault();
         this.setState({...this.state , board : this._generateTable(this._selectLevel()), timeStart: true, timer: false});
     }
@@ -90,6 +88,8 @@ class Board extends React.Component {
     _restartGame(event) {
         event.preventDefault();
         this.setState(this.baseState);
+        this.reveled = -1;
+        this.toFind = 0;
     }
 
     _caseToFind(number, min, max) {

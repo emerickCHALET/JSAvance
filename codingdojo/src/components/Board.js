@@ -9,7 +9,8 @@ class Board extends React.Component {
         this.toFind = 0;
         this.width = 0;
         this.state = {
-            board: []
+            board: [],
+            reveled: -1
         }
     }
 
@@ -47,6 +48,7 @@ class Board extends React.Component {
                 let random = Math.floor(Math.random() * caseToFind.length);
                 if (random === 1) {
                     line.push(true);
+                    this.setState({...this.state , reveled : this.state.reveled + 1});
                 }
                 else{
                     line.push(false);
@@ -80,6 +82,26 @@ class Board extends React.Component {
         }
         console.log(caseToFind);
         return caseToFind;
+    }
+
+    _checkValid(event){
+        event.preventDefault();
+        let data = event.target.getAttribute('data');
+
+        if(this.state.reveled === 0){
+            // Tu as gagné
+        }
+
+        if(data === "true"){
+            event.target.className = "yellow";
+            this.setState({...this.state , reveled : this.state.reveled - 1});
+        }
+        else{
+            // Tu as perdu
+            // Arret du chrono
+        }
+
+        console.log(data);
     }
 
 
@@ -124,7 +146,7 @@ class Board extends React.Component {
                 {board.map((line, i) => (
                     <tr key={i}>
                         {line.map((row, i) => (
-                            <td key={i} className={row ? 'yellow' : 'red'}/>
+                            <td key={i} data = {row ? 'true' : 'false'} className={row ? 'yellow' : 'red'} onClick={event => this._checkValid(event)}/>
                         ))}
                     </tr>
                 ))}

@@ -1,17 +1,21 @@
 import React from 'react';
 import {connect} from "react-redux";
+import Timer from "./Timer";
 
 class Board extends React.Component {
 
     constructor(props) {
         super(props);
+
         this.level = "";
         this.toFind = 0;
         this.width = 0;
+        this.win = 0;
+        this.reveled = -1;
+        this.timerStart = false;
         this.state = {
-            board: [],
-            reveled: -1
-        }
+            board: []
+        };
     }
 
     _selectLevel() {
@@ -48,7 +52,8 @@ class Board extends React.Component {
                 let random = Math.floor(Math.random() * caseToFind.length);
                 if (random === 1) {
                     line.push(true);
-                    this.setState({...this.state , reveled : this.state.reveled + 1});
+                   this.reveled += 1;
+                    console.log(this.reveled);
                 }
                 else{
                     line.push(false);
@@ -63,6 +68,11 @@ class Board extends React.Component {
    _startGame(event){
         event.preventDefault();
         this.setState({...this.state , board : this._generateTable(this._selectLevel())});
+        this.timerStart = true;
+
+        this.state.board.map((items ) => {
+            items.className = "black";
+       })
     }
 
     _caseToFind(number, min, max) {
@@ -88,31 +98,25 @@ class Board extends React.Component {
         event.preventDefault();
         let data = event.target.getAttribute('data');
 
-        if(this.state.reveled === 0){
+        if(this.reveled === 0){
             // Tu as gagné
+            console.log("Tu as gagné");
+            this.win += 1;
+
+            // call aux scores en envoyant win + level + name du player
         }
 
         if(data === "true"){
             event.target.className = "yellow";
-            this.setState({...this.state , reveled : this.state.reveled - 1});
+            this.reveled -= 1;
+            console.log(this.reveled);
         }
         else{
+            event.target.className = "red";
             // Tu as perdu
-            // Arret du chrono
         }
 
         console.log(data);
-    }
-
-
-    /*
-    * TO DO : timer
-    *   - Start timer for memorization (e.g. : 10s easy, 7s medium, 5s hard)
-    *   - Start timer when game start ???
-    */
-
-    _timer() {
-
     }
 
     /*
@@ -141,7 +145,9 @@ class Board extends React.Component {
                     <option value="HARD">Hard - 10x10</option>
                 </select>
                 <button onClick = {event => this._startGame(event)}>Start Game</button>
-                <p> You have 00:00 to memorize</p>
+                {this.timerStart &&
+                  <Timer />
+                }
                 <table align="center"><tbody>
                 {board.map((line, i) => (
                     <tr key={i}>

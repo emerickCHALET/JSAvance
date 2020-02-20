@@ -6,33 +6,12 @@ class Board extends React.Component {
     constructor(props) {
         super(props);
         this.level = "";
+        this.toFind = 0;
         this.width = 0;
-        /* this.ex = [
-            [true, true, false, false, false],
-            [false, true, true, false, false]
-        ] */
         this.state = {
-            ex1: []
+            board: []
         }
     }
-
-    /* createTab() {
-        let tab = [];
-        for(let i = 0, n = 3; i < n ; i++) {
-            let line = [];
-            for(let i = 0, n = 5; i < n ; i++) {
-                let random = Math.floor(Math.random() * 2);
-                if (random == 1) {
-                    line.push(true);
-                } else {
-                    line.push(false);
-                }
-            }
-            tab.push(line);
-        }
-        console.log('tab', tab);
-        return tab;
-    }*/
 
     _selectLevel() {
         this.level = document.getElementById('level').value;
@@ -43,38 +22,74 @@ class Board extends React.Component {
         switch (level) {
             case "EASY":
                 this.width = 5;
+                this.toFind = 6;
                 break;
             case "MEDIUM":
-                this.width = 12;
+                this.width = 8;
+                this.toFind = 10;
                 break;
             case "HARD":
-                this.width = 20;
+                this.width = 10;
+                this.toFind = 12;
                 break;
             default:
-                this.width = 4;
+                this.width = 5;
+                this.toFind = 6;
                 break;
         }
+
+        let caseToFind = this._caseToFind(this.toFind, 0, this.width);
 
         let tab = [];
         for(let i = 0, n = this.width; i < n ; i++) {
             let line = [];
             for(let i = 0, n = this.width; i < n ; i++) {
-                let random = Math.floor(Math.random() * 2);
-                if (random === 1) {
+                /*for (let i = 0; i < this.toFind +1; i++){
+                    if (random === 1) {
+                        line.push(true);
+                    }
+                    else{
+                        line.push(false);
+                    }
+                } */
+                for (let e = 0; e < caseToFind.length; e++) {
                     line.push(true);
-                } else {
-                    line.push(false);
                 }
+
+                line.push(false);
             }
+
             tab.push(line);
     }
+
+
+
         console.log('tab', tab);
         return tab;
     }
 
    _startGame(event){
         event.preventDefault();
-        this.setState({...this.state , ex1 : this._generateTable(this._selectLevel())});
+        this.setState({...this.state , board : this._generateTable(this._selectLevel())});
+    }
+
+    _caseToFind(number, min, max) {
+        let caseToFind = [];
+
+        for (let i = 0; i < number; i++) {
+
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            let minRow = Math.floor(Math.random() * (max - min)) + min;
+            let minCol = Math.floor(Math.random() * (max - min)) + min;
+            while (caseToFind.indexOf(minRow + "." + minCol) !== -1 && caseToFind.length < number) {
+                minRow = Math.floor(Math.random() * (max - min)) + min;
+                minCol = Math.floor(Math.random() * (max - min)) + min;
+            }
+            caseToFind.push(minRow + minCol);
+        }
+        console.log(caseToFind);
+        return caseToFind;
     }
 
 
@@ -101,21 +116,22 @@ class Board extends React.Component {
         })
     }
 
+
     render() {
-        const {ex1} = this.state;
+        const {board} = this.state;
         return (
             <div>
-            <h2> Welcome {this.props.users} </h2>
-            <p> Choose your level</p>
-            <select id="level" onChange = {event => this._startGame(event)}>
-                <option value="EASY">Easy - 4x4</option>
-                <option value="MEDIUM">Medium - 12x12</option>
-                <option value="HARD">Hard - 20x20</option>
-            </select>
-            <p> You have 00:00 to memorize</p>
-               
+                <h2> Welcome {this.props.users} </h2>
+                <p> Choose your level</p>
+                <select id="level">
+                    <option value="EASY">Easy - 5x5</option>
+                    <option value="MEDIUM">Medium - 8x8</option>
+                    <option value="HARD">Hard - 10x10</option>
+                </select>
+                <button onClick = {event => this._startGame(event)}>Start Game</button>
+                <p> You have 00:00 to memorize</p>
                 <table align="center"><tbody>
-                {ex1.map((line, i) => (
+                {board.map((line, i) => (
                     <tr key={i}>
                         {line.map((row, i) => (
                             <td key={i} className={row ? 'yellow' : 'red'}/>

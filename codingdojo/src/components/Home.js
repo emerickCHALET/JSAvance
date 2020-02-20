@@ -7,7 +7,7 @@ class Home extends React.Component {
 
     /**
      * Envoie le nom de l'utilisateur à Redux
-     * @param event
+     * @param {object} event
      */
     addUser(event) {
         event.preventDefault();

@@ -79,7 +79,7 @@ class Board extends React.Component {
 
     /**
      * Start the game
-     * @param {event} event 
+     * @param {object} event
      */
     _startGame(event){
         event.preventDefault();
@@ -102,7 +102,7 @@ class Board extends React.Component {
 
     /**
      * Check all cells
-     * @param {event} event 
+     * @param {object} event
      */
 
     _checkValid(event){
@@ -181,7 +181,6 @@ class Board extends React.Component {
     /**
      * Add score
      */
-
     addScore(){
         this.props.addScore({
             name: this.props.users,
@@ -192,7 +191,7 @@ class Board extends React.Component {
     
     /**
      * Restart the game
-     * @param {event} event 
+     * @param {object} event
      */
     _restartGame(event) {
         event.preventDefault();

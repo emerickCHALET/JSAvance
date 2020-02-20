@@ -3,10 +3,6 @@ import {connect} from 'react-redux';
 
 class Scoreboard extends React.Component {
 
-    /**
-     * Renvoi le tableau des scores
-     * @returns {HTML}
-     */
     render() {
         const {scores} = this.props;
         return (

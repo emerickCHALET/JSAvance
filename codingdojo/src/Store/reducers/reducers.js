@@ -19,6 +19,7 @@ export default function Game(state = initialState, action) {
     let nextState;
 
     switch (action.type) {
+        // Ajoute les scores dans le tableau
         case ADD_SCORE:
             let newState;
 

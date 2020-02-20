@@ -11,13 +11,9 @@ import Home from './Home';
 import Scoreboard from './Scoreboard'
 import About from './About';
 import Board from './Board';
+import {connect} from "react-redux";
 
-export default class Routing extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.test = true;
-    }
+class Routing extends React.Component {
 
     render() {
 
@@ -32,7 +28,7 @@ export default class Routing extends React.Component {
                             <li>
                                 <Link to="/about" className="hey">About</Link>
                             </li>
-                            {this.test &&
+                            {this.props.users !== "" &&
                                 <li>
                                     <Link to="/Board" className="hey">Enter game</Link>
                                 </li>
@@ -52,9 +48,15 @@ export default class Routing extends React.Component {
                         <Route path="/About">
                             <About/>
                         </Route>
-                        <Route path="/Board">
-                            <Board />
-                        </Route>
+                        {this.props.users !== "" ?
+                            <Route path="/Board">
+                                <Board/>
+                            </Route>
+                            :
+                            <Route path="/">
+                                <Home/>
+                            </Route>
+                        }
                         <Route path="/Scoreboard">
                             <Scoreboard />
                         </Route>
@@ -64,3 +66,11 @@ export default class Routing extends React.Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        users: state.users
+    }
+};
+
+export default connect(mapStateToProps)(Routing)

@@ -29,6 +29,6 @@ const mapStateToProps = state => {
     return {
         scores: state.scores
     }
-}
+};
 
 export default connect(mapStateToProps)(Scoreboard)

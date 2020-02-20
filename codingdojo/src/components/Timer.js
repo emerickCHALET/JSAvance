@@ -8,11 +8,10 @@ class Timer extends React.Component {
         super(props);
         this.state = {
             minutes: 0,
-            seconds: 1,
+            seconds: 5,
             finish: false
         };
         this.baseState = this.state;
-
     }
 
 

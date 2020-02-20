@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Timer from "./Timer";
-import {addScore} from "../Store/reducers/actions";
+import {addScore, resetTimer} from "../Store/reducers/actions";
 
 class Board extends React.Component {
 
@@ -83,14 +83,17 @@ class Board extends React.Component {
 
     _startGame(event){
         event.preventDefault();
+        this.props.resetTimer();
+        console.log("Avant :" + this.state.timer);
+        this.reveled = -1;
+        this.toFind = 0;
         this.setState({...this.state , board : this._generateTable(this._selectLevel()), timeStart: true, timer: false});
+        console.log("Apres :" + this.state.timer);
     }
 
     _restartGame(event) {
         event.preventDefault();
         this.setState(this.baseState);
-        this.reveled = -1;
-        this.toFind = 0;
     }
 
     _caseToFind(number, min, max) {
@@ -161,8 +164,13 @@ class Board extends React.Component {
         })
     }
 
+    componentWillUnmount() {
+        this.setState(this.baseState);
+    }
+
     render() {
-        const {board, timer} = this.state;
+        const {board} = this.state;
+        const {timers} = this.props;
         return (
             <div>
                 <h2> Welcome {this.props.users} </h2>
@@ -179,7 +187,7 @@ class Board extends React.Component {
 
                 {board.map((line, i) => (
                     <tr key={i}>
-                        {timer === false ?
+                        {timers === false ?
                                 line.map((row, i) => (
                                     <td key={i} data={row ? 'true' : 'false'} className={row ? 'yellow' : 'red'}
                                     />
@@ -211,6 +219,9 @@ const mapDispatchToProps = dispatch => {
     return {
         addScore: score => {
             dispatch(addScore(score))
+        },
+        resetTimer: timer => {
+            dispatch(resetTimer())
         }
     };
 };

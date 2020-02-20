@@ -5,6 +5,7 @@
 export const ADD_USER = 'ADD_USER';
 export const ADD_SCORE = 'ADD_SCORE';
 export const ADD_TIMER = 'ADD_TIMER';
+export const RESET_TIMER = 'RESET_TIMER';
 
 /**
  * Get the user name
@@ -21,4 +22,9 @@ export function addScore(score) {
 export function addTimer(timer) {
     return { type: ADD_TIMER, timer}
 }
+
+export function resetTimer(timer) {
+    return { type: RESET_TIMER, timer}
+}
+
 

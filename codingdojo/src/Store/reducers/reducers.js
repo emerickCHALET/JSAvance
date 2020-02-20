@@ -3,7 +3,7 @@
 import {
     ADD_USER,
     ADD_TIMER,
-    ADD_SCORE
+    ADD_SCORE, RESET_TIMER
 } from './actions';
 
 
@@ -37,6 +37,13 @@ export default function Game(state = initialState, action) {
             nextState = {
                 ...state,
                 timers: action.timer
+            };
+            return nextState || state;
+        case RESET_TIMER:
+            // Le User n'est pas dans la liste, on l'ajoute.
+            nextState = {
+                ...state,
+                timers: false
             };
             return nextState || state;
 

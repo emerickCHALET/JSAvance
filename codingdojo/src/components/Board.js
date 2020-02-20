@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Timer from "./Timer";
+import {addScore} from "../Store/reducers/actions";
 
 class Board extends React.Component {
 
@@ -130,6 +131,11 @@ class Board extends React.Component {
                 console.log(this.reveled);
             } else {
                 event.target.className = "red";
+
+                if(this.win > 0){
+                    this.addScore();
+                }
+
                 alert("Tu as perdu");
             }
 
@@ -150,15 +156,15 @@ class Board extends React.Component {
 
     /*
     * TO DO : add score
-    * 
-    * 
+    *
+    *
     */
 
     addScore(){
         this.props.addScore({
             name: this.props.users,
-            win: this.win,
-            level: this.level
+            victory: this.win,
+            level: this.level,
         })
     }
 
@@ -208,4 +214,12 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps)(Board)
+const mapDispatchToProps = dispatch => {
+    return {
+        addScore: score => {
+            dispatch(addScore(score))
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Board)

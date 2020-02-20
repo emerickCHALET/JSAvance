@@ -2,14 +2,15 @@
 
 import {
     ADD_USER,
-    // ADD_SCORE,
     ADD_TIMER
+    ADD_SCORE
 } from './actions';
 
 
 const initialState = {
     users: "",
     timers: false
+    scores: [],
 };
 
 export default function Game(state = initialState, action) {
@@ -18,6 +19,12 @@ export default function Game(state = initialState, action) {
     let nextState;
 
     switch (action.type) {
+        case ADD_SCORE:
+
+            let newState;
+            newState =  {...state, scores: [...state.scores, action.score]};
+
+            return newState || state;
         case ADD_USER:
             // Le User n'est pas dans la liste, on l'ajoute.
             nextState = {
@@ -32,8 +39,7 @@ export default function Game(state = initialState, action) {
                 timers: action.timer
             };
             return nextState || state;
-        // case ADD_SCORE:
-        
+
         default:
             return state;
     }

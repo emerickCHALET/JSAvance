@@ -4,6 +4,11 @@ import { connect } from 'react-redux';
 import {addUser} from "../Store/reducers/actions";
 
 class Home extends React.Component {
+
+    /**
+     * Envoie le nom de l'utilisateur à Redux
+     * @param event
+     */
     addUser(event) {
         event.preventDefault();
         let name = event.target[0].value;

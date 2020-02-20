@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {addTimer} from "../Store/reducers/actions";
 
+/**
+ * Timer component
+ */
 class Timer extends React.Component {
 
     constructor(props) {
@@ -14,12 +17,18 @@ class Timer extends React.Component {
         this.baseState = this.state;
     }
 
+    /**
+     * Send timer status to redux
+     */
     addTimer() {
         let finish = this.setState({...this.state , finish: true});
         this.props.addTimer(finish);
         console.log(this.state.finish);
     }
 
+    /**
+     * Initialise l'intervalle de temps à afficher
+     */
     componentDidMount() {
         this.myInterval = setInterval(() => {
             const { seconds, minutes } = this.state;
@@ -43,6 +52,9 @@ class Timer extends React.Component {
         }, 1000)
     }
 
+    /**
+     * Nettoie le composant timer et reset l'interval
+     */
     componentWillUnmount() {
         clearInterval(this.myInterval);
         this.setState(this.baseState);
@@ -60,6 +72,7 @@ class Timer extends React.Component {
         )
     }
 }
+
 const mapDispatchToProps = dispatch => {
     return {
         addTimer: timer => {

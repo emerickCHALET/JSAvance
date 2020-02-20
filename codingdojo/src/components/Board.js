@@ -57,7 +57,7 @@ class Board extends React.Component {
                 let random = Math.floor(Math.random() * caseToFind.length);
                 if (random === 1) {
                     line.push(true);
-                   this.reveled += 1;
+                    this.reveled += 1;
                     console.log(this.reveled);
                 }
                 else{
@@ -70,49 +70,20 @@ class Board extends React.Component {
         return tab;
     }
 
-    static getDerivedStateFromProps(props, state){
-        if (state.timer !== props.timers) {
-            return {
-                timer: true,
-            }
-        }
-        return {
-            timer: false,
-        }
-    }
-
     _startGame(event){
         event.preventDefault();
         this.props.resetTimer();
-        console.log("Avant :" + this.state.timer);
         this.reveled = -1;
         this.toFind = 0;
         this.setState({...this.state , board : this._generateTable(this._selectLevel()), timeStart: true, timer: false});
-        console.log("Apres :" + this.state.timer);
     }
 
-    _restartGame(event) {
-        event.preventDefault();
-        this.setState(this.baseState);
-    }
-
-    _caseToFind(number, min, max) {
-        let caseToFind = [];
-
-        for (let i = 0; i < number; i++) {
-
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            let minRow = Math.floor(Math.random() * (max - min)) + min;
-            let minCol = Math.floor(Math.random() * (max - min)) + min;
-            while (caseToFind.indexOf(minRow + minCol) !== -1 && caseToFind.length < number) {
-                minRow = Math.floor(Math.random() * (max - min)) + min;
-                minCol = Math.floor(Math.random() * (max - min)) + min;
-            }
-            caseToFind.push(minRow + minCol);
+    _loadTimer(){
+        if(this.state.timeStart){
+            return(
+                <Timer />
+            );
         }
-        console.log(caseToFind);
-        return caseToFind;
     }
 
     _checkValid(event){
@@ -137,7 +108,6 @@ class Board extends React.Component {
                 if(this.win > 0){
                     this.addScore();
                 }
-
                 alert("Tu as perdu");
                 this._restartGame(event);
             }
@@ -148,14 +118,35 @@ class Board extends React.Component {
         }
     }
 
-    _loadTimer(){
-        if(this.state.timeStart){
-            return(
-                <Timer />
-            );
+    _caseToFind(number, min, max) {
+        let caseToFind = [];
+
+        for (let i = 0; i < number; i++) {
+
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            let minRow = Math.floor(Math.random() * (max - min)) + min;
+            let minCol = Math.floor(Math.random() * (max - min)) + min;
+            while (caseToFind.indexOf(minRow + minCol) !== -1 && caseToFind.length < number) {
+                minRow = Math.floor(Math.random() * (max - min)) + min;
+                minCol = Math.floor(Math.random() * (max - min)) + min;
+            }
+            caseToFind.push(minRow + minCol);
+        }
+        return caseToFind;
+    }
+
+    static getDerivedStateFromProps(props, state){
+        if (state.timer !== props.timers) {
+            return {
+                timer: true,
+            }
+        }
+        return {
+            timer: false,
         }
     }
-    
+
     addScore(){
         this.props.addScore({
             name: this.props.users,
@@ -164,7 +155,8 @@ class Board extends React.Component {
         })
     }
 
-    componentWillUnmount() {
+    _restartGame(event) {
+        event.preventDefault();
         this.setState(this.baseState);
     }
 
@@ -220,7 +212,7 @@ const mapDispatchToProps = dispatch => {
         addScore: score => {
             dispatch(addScore(score))
         },
-        resetTimer: timer => {
+        resetTimer: () => {
             dispatch(resetTimer())
         }
     };

@@ -46,7 +46,6 @@ export default function Game(state = initialState, action) {
                 timers: false
             };
             return nextState || state;
-
         default:
             return state;
     }

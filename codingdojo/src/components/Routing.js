@@ -14,9 +14,7 @@ import Board from './Board';
 import {connect} from "react-redux";
 
 class Routing extends React.Component {
-
     render() {
-
         return (
             <Router>
                 <div>

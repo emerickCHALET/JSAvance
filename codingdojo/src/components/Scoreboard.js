@@ -5,7 +5,6 @@ class Scoreboard extends React.Component {
 
     render() {
         const {scores} = this.props;
-
         return (
             <div>
                 <h2>ScoreBoard</h2>

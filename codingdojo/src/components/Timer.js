@@ -14,7 +14,6 @@ class Timer extends React.Component {
         this.baseState = this.state;
     }
 
-
     addTimer() {
         let finish = this.setState({...this.state , finish: true});
         this.props.addTimer(finish);
@@ -44,7 +43,6 @@ class Timer extends React.Component {
         }, 1000)
     }
 
-
     componentWillUnmount() {
         clearInterval(this.myInterval);
         this.setState(this.baseState);
@@ -55,7 +53,7 @@ class Timer extends React.Component {
         return (
             <div>
                 { minutes === 0 && seconds === 0
-                    ? <h1>Busted!</h1>
+                    ? <h1>Game Started Now !</h1>
                     : <h1>Time Remaining: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}</h1>
                 }
             </div>

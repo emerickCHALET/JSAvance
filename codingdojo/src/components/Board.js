@@ -12,11 +12,14 @@ class Board extends React.Component {
         this.width = 0;
         this.win = 0;
         this.reveled = -1;
-        // this.timeEllapsed = false;
-        this.timerStart = false;
+
         this.state = {
             board: [],
+            timeStart: false,
+            timer: false
         };
+
+        this.baseState = this.state;
     }
 
     _selectLevel() {
@@ -66,14 +69,27 @@ class Board extends React.Component {
         return tab;
     }
 
+    static getDerivedStateFromProps(props, state){
+        if (state.timer !== props.timers) {
+            console.log("State : " + state.timer);
+            console.log("Props : " + props.timers);
+            return {
+                timer: props.timer,
+            }
+        }
+        return {
+            timer: false,
+        }
+    }
+
    _startGame(event){
         event.preventDefault();
-        this.setState({...this.state , board : this._generateTable(this._selectLevel())});
-        this.timerStart = true;
+        this.setState({...this.state , board : this._generateTable(this._selectLevel()), timeStart: true, timer: false});
     }
 
     _restartGame(event) {
-
+        event.preventDefault();
+        this.setState(this.baseState);
     }
 
     _caseToFind(number, min, max) {
@@ -102,11 +118,10 @@ class Board extends React.Component {
             let data = event.target.getAttribute('data');
 
             if (this.reveled === 0) {
-                // Tu as gagné
-                console.log("Tu as gagné");
+                alert("Tu as gagné");
                 this.win += 1;
 
-                // call aux scores en envoyant win + level + name du player
+                //this.addScore();
             }
 
             if (data === "true") {
@@ -115,12 +130,21 @@ class Board extends React.Component {
                 console.log(this.reveled);
             } else {
                 event.target.className = "red";
-                // Tu as perdu
+                alert("Tu as perdu");
             }
 
             event.target.setAttribute("clicked", "true");
 
             console.log(data);
+        }
+    }
+
+    _loadTimer(){
+        if(this.state.timeStart){
+            this.state.timer = false;
+            return(
+                <Timer />
+            );
         }
     }
 
@@ -133,12 +157,13 @@ class Board extends React.Component {
     addScore(){
         this.props.addScore({
             name: this.props.users,
-
+            win: this.win,
+            level: this.level
         })
     }
 
     render() {
-        const {board} = this.state;
+        const {board, timer} = this.state;
         return (
             <div>
                 <h2> Welcome {this.props.users} </h2>
@@ -150,14 +175,12 @@ class Board extends React.Component {
                 </select>
                 <button onClick = {event => this._startGame(event)}>Start Game</button>
                 <button onClick = {event => this._restartGame(event)}>Restart</button>
-                {this.timerStart &&
-                  <Timer />
-                }
+                {this._loadTimer()}
                 <table align="center"><tbody>
 
                 {board.map((line, i) => (
                     <tr key={i}>
-                        {this.props.timers === false ?
+                        {timer === false ?
                                 line.map((row, i) => (
                                     <td key={i} data={row ? 'true' : 'false'} className={row ? 'yellow' : 'red'}
                                     />

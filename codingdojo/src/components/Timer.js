@@ -3,15 +3,24 @@ import { connect } from 'react-redux';
 import {addTimer} from "../Store/reducers/actions";
 
 class Timer extends React.Component {
-    state = {
-        minutes: 0,
-        seconds: 5,
-    };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            minutes: 0,
+            seconds: 1,
+            finish: false
+        };
+
+        this.baseState = this.state;
+
+    }
+
 
     addTimer() {
-        let finish = true;
-        console.log(finish);
-        this.props.addTimer(finish);
+        this.state.finish = true;
+        this.props.addTimer(this.state.finish);
+        console.log(this.state.finish);
     }
 
     componentDidMount() {
@@ -39,7 +48,8 @@ class Timer extends React.Component {
 
 
     componentWillUnmount() {
-        clearInterval(this.myInterval)
+        clearInterval(this.myInterval);
+        this.setState(this.baseState);
     }
 
     render() {

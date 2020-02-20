@@ -22,11 +22,18 @@ class Board extends React.Component {
 
         this.baseState = this.state;
     }
-
+    /**
+     * Select the level before launch game
+     */
     _selectLevel() {
         this.level = document.getElementById('level').value;
         return this.level;
     }
+
+    /**
+     * Generate the board depending on the level
+     * @param {String} level 
+     */
 
     _generateTable(level) {
         switch (level) {
@@ -70,6 +77,10 @@ class Board extends React.Component {
         return tab;
     }
 
+    /**
+     * Start the game
+     * @param {event} event 
+     */
     _startGame(event){
         event.preventDefault();
         this.props.resetTimer();
@@ -78,6 +89,9 @@ class Board extends React.Component {
         this.setState({...this.state , board : this._generateTable(this._selectLevel()), timeStart: true, timer: false});
     }
 
+    /**
+     * Start the timer
+     */
     _loadTimer(){
         if(this.state.timeStart){
             return(
@@ -85,6 +99,11 @@ class Board extends React.Component {
             );
         }
     }
+
+    /**
+     * Check all cells
+     * @param {event} event 
+     */
 
     _checkValid(event){
         event.preventDefault();
@@ -118,6 +137,13 @@ class Board extends React.Component {
         }
     }
 
+    /**
+     * Generate random cells for board
+     * @param {*} number 
+     * @param {*} min 
+     * @param {*} max 
+     */
+
     _caseToFind(number, min, max) {
         let caseToFind = [];
 
@@ -136,6 +162,11 @@ class Board extends React.Component {
         return caseToFind;
     }
 
+    /**
+     * Change the state of the game
+     * @param {*} props 
+     * @param {*} state 
+     */
     static getDerivedStateFromProps(props, state){
         if (state.timer !== props.timers) {
             return {
@@ -147,6 +178,10 @@ class Board extends React.Component {
         }
     }
 
+    /**
+     * Add score
+     */
+
     addScore(){
         this.props.addScore({
             name: this.props.users,
@@ -154,7 +189,11 @@ class Board extends React.Component {
             level: this.level,
         })
     }
-
+    
+    /**
+     * Restart the game
+     * @param {event} event 
+     */
     _restartGame(event) {
         event.preventDefault();
         this.setState(this.baseState);

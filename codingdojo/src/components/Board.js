@@ -75,6 +75,7 @@ class Board extends React.Component {
    _startGame(event){
         event.preventDefault();
         this.setState({...this.state , ex1 : this._generateTable(this._selectLevel())});
+        this._timer();
     }
 
 
@@ -84,9 +85,6 @@ class Board extends React.Component {
     *   - Start timer when game start ???
     */
 
-    _timer() {
-
-    }
 
     /*
     * TO DO : add score
@@ -112,7 +110,10 @@ class Board extends React.Component {
                 <option value="MEDIUM">Medium - 12x12</option>
                 <option value="HARD">Hard - 20x20</option>
             </select>
-            <p> You have 00:00 to memorize</p>
+                <div id="demo"/>
+                <script type="text/javascript">
+
+                </script>
                
                 <table align="center"><tbody>
                 {ex1.map((line, i) => (
@@ -128,7 +129,41 @@ class Board extends React.Component {
 
         )
     }
+    _timer() {
+        // Set the date we're counting down to
+        var countDownDate = new Date()
+        countDownDate.setTime(new Date().setSeconds(30));
+
+
+// Update the count down every 1 second
+        var x = setInterval(function() {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Output the result in an element with id="demo"
+            document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+                + minutes + "m " + seconds + "s ";
+
+            // If the count down is over, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("demo").innerHTML = "EXPIRED";
+            }
+        }, 1000);}
+
 }
+
+
 const mapStateToProps = state => {
     return {
         users: state.users,

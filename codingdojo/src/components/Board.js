@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Timer from "./Timer";
+import {addScore} from "../Store/reducers/actions";
 
 class Board extends React.Component {
 
@@ -128,7 +129,8 @@ class Board extends React.Component {
     addScore(){
         this.props.addScore({
             name: this.props.users,
-
+            victory:this.props.victory,
+            level: this.props.level,
         })
     }
 
@@ -170,4 +172,12 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps)(Board)
+const mapDispatchToProps = dispatch => {
+    return {
+        addScore: score => {
+            dispatch(addScore(score))
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Board)

@@ -6,10 +6,23 @@ class Scoreboard extends React.Component {
         super(props);
     }
 
+
     render() {
+        const {scores} = this.props;
+
         return (
-            <p> en construction </p>
-        )
+            <table className="style"><thead><tr><th>Nom</th><th>victory</th><th>level</th></tr></thead><tbody>
+            {scores.map((scoreboard,index) => {
+                return (
+                    <tr key={index}>
+                        <td>{scoreboard.name}</td>
+                        <td>{scoreboard.victory}</td>
+                        <td>{scoreboard.level}</td>
+                    </tr>
+                );
+            })}
+            </tbody></table>
+        );
     }
 }
 

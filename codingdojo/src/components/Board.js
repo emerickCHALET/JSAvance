@@ -103,7 +103,6 @@ class Board extends React.Component {
             // Tu as gagné
             console.log("Tu as gagné");
             this.win += 1;
-            this.addScore();
 
             // call aux scores en envoyant win + level + name du player
         }
@@ -116,6 +115,9 @@ class Board extends React.Component {
         else{
             event.target.className = "red";
             // Tu as perdu
+            if(this.win > 0){
+                this.addScore();
+            }
         }
 
         console.log(data);
@@ -130,8 +132,8 @@ class Board extends React.Component {
     addScore(){
         this.props.addScore({
             name: this.props.users,
-            victory:this.props.victory,
-            level: this.props.level,
+            victory: this.win,
+            level: this.level,
         })
     }
 

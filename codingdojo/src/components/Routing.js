@@ -27,18 +27,18 @@ export default class Routing extends React.Component {
                     <nav>
                         <ul>
                             <li>
-                                <Link to="/" class="hey">Home</Link>
+                                <Link to="/" className="hey">Home</Link>
                             </li>
                             <li>
-                                <Link to="/about" class="hey">About</Link>
+                                <Link to="/about" className="hey">About</Link>
                             </li>
                             {this.test &&
                                 <li>
-                                    <Link to="/Board" class="hey">Enter game</Link>
+                                    <Link to="/Board" className="hey">Enter game</Link>
                                 </li>
                             }
                             <li>
-                                <Link to="/Scoreboard" class="hey">Scoreboard</Link>
+                                <Link to="/Scoreboard" className="hey">Scoreboard</Link>
                             </li>
                         </ul>
                     </nav>

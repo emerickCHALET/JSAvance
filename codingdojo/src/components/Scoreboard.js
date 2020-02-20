@@ -10,7 +10,9 @@ class Scoreboard extends React.Component {
         const {scores} = this.props;
 
         return (
-            <table className="style"><thead><tr><th>nom</th><th>victory</th><th>level</th></tr></thead><tbody>
+            <div>
+                <h2>ScoreBoard</h2>
+            <table className="style" text align="center"><thead><tr><th className="result">Nom</th><th className="result">Victory</th><th className="result">Level</th></tr></thead><tbody>
             {scores.map((scoreboard,index) => {
                 return (
                     <tr key={index}>
@@ -21,6 +23,7 @@ class Scoreboard extends React.Component {
                 );
             })}
             </tbody></table>
+            </div>
         );
     }
 }

@@ -1,13 +1,15 @@
 // Store/Reducers/game.js
 
 import {
-    ADD_USER
-    // ADD_SCORE
+    ADD_USER,
+    // ADD_SCORE,
+    ADD_TIMER
 } from './actions';
 
 
 const initialState = {
-    users: ""
+    users: "",
+    timers: false
 };
 
 export default function Game(state = initialState, action) {
@@ -21,6 +23,13 @@ export default function Game(state = initialState, action) {
             nextState = {
                 ...state,
                 users: action.name
+            };
+            return nextState || state;
+        case ADD_TIMER:
+            // Le User n'est pas dans la liste, on l'ajoute.
+            nextState = {
+                ...state,
+                timers: action.timer
             };
             return nextState || state;
         // case ADD_SCORE:

@@ -12,9 +12,10 @@ class Board extends React.Component {
         this.width = 0;
         this.win = 0;
         this.reveled = -1;
+        // this.timeEllapsed = false;
         this.timerStart = false;
         this.state = {
-            board: []
+            board: [],
         };
     }
 
@@ -69,10 +70,10 @@ class Board extends React.Component {
         event.preventDefault();
         this.setState({...this.state , board : this._generateTable(this._selectLevel())});
         this.timerStart = true;
+    }
 
-        this.state.board.map((items ) => {
-            items.className = "black";
-       })
+    _restartGame(event) {
+
     }
 
     _caseToFind(number, min, max) {
@@ -96,27 +97,31 @@ class Board extends React.Component {
 
     _checkValid(event){
         event.preventDefault();
-        let data = event.target.getAttribute('data');
 
-        if(this.reveled === 0){
-            // Tu as gagné
-            console.log("Tu as gagné");
-            this.win += 1;
+        if(!event.target.getAttribute('clicked', "true")) {
+            let data = event.target.getAttribute('data');
 
-            // call aux scores en envoyant win + level + name du player
+            if (this.reveled === 0) {
+                // Tu as gagné
+                console.log("Tu as gagné");
+                this.win += 1;
+
+                // call aux scores en envoyant win + level + name du player
+            }
+
+            if (data === "true") {
+                event.target.className = "yellow";
+                this.reveled -= 1;
+                console.log(this.reveled);
+            } else {
+                event.target.className = "red";
+                // Tu as perdu
+            }
+
+            event.target.setAttribute("clicked", "true");
+
+            console.log(data);
         }
-
-        if(data === "true"){
-            event.target.className = "yellow";
-            this.reveled -= 1;
-            console.log(this.reveled);
-        }
-        else{
-            event.target.className = "red";
-            // Tu as perdu
-        }
-
-        console.log(data);
     }
 
     /*
@@ -132,7 +137,6 @@ class Board extends React.Component {
         })
     }
 
-
     render() {
         const {board} = this.state;
         return (
@@ -145,28 +149,39 @@ class Board extends React.Component {
                     <option value="HARD">Hard - 10x10</option>
                 </select>
                 <button onClick = {event => this._startGame(event)}>Start Game</button>
+                <button onClick = {event => this._restartGame(event)}>Restart</button>
                 {this.timerStart &&
                   <Timer />
                 }
                 <table align="center"><tbody>
+
                 {board.map((line, i) => (
                     <tr key={i}>
-                        {line.map((row, i) => (
-                            <td key={i} data = {row ? 'true' : 'false'} className={row ? 'yellow' : 'red'} onClick={event => this._checkValid(event)}/>
-                        ))}
+                        {this.props.timers === false ?
+                                line.map((row, i) => (
+                                    <td key={i} data={row ? 'true' : 'false'} className={row ? 'yellow' : 'red'}
+                                    />
+                                ))
+                            :
+
+                            line.map((row, i) => (
+                                <td key={i} data={row ? 'true' : 'false'} className="black"
+                                    onClick={event => this._checkValid(event)}/>
+                            ))
+                        }
                     </tr>
                 ))}
+
                 </tbody></table>
             </div>
-
-
         )
     }
 }
 const mapStateToProps = state => {
     return {
         users: state.users,
-        scores: state.scores
+        scores: state.scores,
+        timers: state.timers
     }
 };
 

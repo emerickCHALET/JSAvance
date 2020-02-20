@@ -1,10 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import {addTimer} from "../Store/reducers/actions";
 
-export default class Timer extends React.Component {
+class Timer extends React.Component {
     state = {
         minutes: 0,
-        seconds: 20,
+        seconds: 5,
     };
+
+    addTimer() {
+        let finish = true;
+        console.log(finish);
+        this.props.addTimer(finish);
+    }
 
     componentDidMount() {
         this.myInterval = setInterval(() => {
@@ -17,7 +25,8 @@ export default class Timer extends React.Component {
             }
             if (seconds === 0) {
                 if (minutes === 0) {
-                    clearInterval(this.myInterval)
+                    clearInterval(this.myInterval);
+                    this.addTimer();
                 } else {
                     this.setState(({ minutes }) => ({
                         minutes: minutes - 1,
@@ -27,6 +36,7 @@ export default class Timer extends React.Component {
             }
         }, 1000)
     }
+
 
     componentWillUnmount() {
         clearInterval(this.myInterval)
@@ -44,3 +54,13 @@ export default class Timer extends React.Component {
         )
     }
 }
+const mapDispatchToProps = dispatch => {
+    return {
+        addTimer: timer => {
+            dispatch(addTimer(timer))
+        }
+    };
+};
+
+
+export default connect(null, mapDispatchToProps)(Timer)

@@ -2,9 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 class Scoreboard extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         const {scores} = this.props;
@@ -12,17 +9,17 @@ class Scoreboard extends React.Component {
         return (
             <div>
                 <h2>ScoreBoard</h2>
-            <table className="style" text align="center"><thead><tr><th className="result">Nom</th><th className="result">Victory</th><th className="result">Level</th></tr></thead><tbody>
-            {scores.map((scoreboard,index) => {
-                return (
-                    <tr key={index}>
-                        <td>{scoreboard.name}</td>
-                        <td>{scoreboard.victory}</td>
-                        <td>{scoreboard.level}</td>
-                    </tr>
-                );
-            })}
-            </tbody></table>
+                <table className="style" align="center"><thead><tr><th className="result">Nom</th><th className="result">Victory</th><th className="result">Level</th></tr></thead><tbody>
+                {scores.map((scoreboard,index) => {
+                    return (
+                        <tr key={index}>
+                            <td>{scoreboard.name}</td>
+                            <td>{scoreboard.victory}</td>
+                            <td>{scoreboard.level}</td>
+                        </tr>
+                    );
+                })}
+                </tbody></table>
             </div>
         );
     }

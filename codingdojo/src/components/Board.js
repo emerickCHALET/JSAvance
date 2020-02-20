@@ -121,8 +121,7 @@ class Board extends React.Component {
             if (this.reveled === 0) {
                 alert("Tu as gagné");
                 this.win += 1;
-
-                //this.addScore();
+                this._restartGame(event);
             }
 
             if (data === "true") {
@@ -137,6 +136,7 @@ class Board extends React.Component {
                 }
 
                 alert("Tu as perdu");
+                this._restartGame(event);
             }
 
             event.target.setAttribute("clicked", "true");
@@ -147,19 +147,12 @@ class Board extends React.Component {
 
     _loadTimer(){
         if(this.state.timeStart){
-            this.state.timer = false;
             return(
                 <Timer />
             );
         }
     }
-
-    /*
-    * TO DO : add score
-    *
-    *
-    */
-
+    
     addScore(){
         this.props.addScore({
             name: this.props.users,

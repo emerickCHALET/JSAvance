@@ -2,15 +2,15 @@
 
 import {
     ADD_USER,
-    ADD_TIMER
+    ADD_TIMER,
     ADD_SCORE
 } from './actions';
 
 
 const initialState = {
     users: "",
-    timers: false
-    scores: [],
+    timers: false,
+    scores: []
 };
 
 export default function Game(state = initialState, action) {

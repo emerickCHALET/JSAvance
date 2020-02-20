@@ -17,8 +17,8 @@ class Timer extends React.Component {
 
 
     addTimer() {
-        this.state.finish = true;
-        this.props.addTimer(this.state.finish);
+        let finish = this.setState({...this.state , finish: true});
+        this.props.addTimer(finish);
         console.log(this.state.finish);
     }
 

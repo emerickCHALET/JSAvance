@@ -26,7 +26,7 @@ class Board extends React.Component {
      * Select the level before launch game
      */
     _selectLevel() {
-        this.level = document.getElementById('level').value;
+        this.level = this.win === 0 ? document.getElementById('level').value : this.level;
         return this.level;
     }
 
@@ -34,7 +34,6 @@ class Board extends React.Component {
      * Generate the board depending on the level
      * @param {String} level 
      */
-
     _generateTable(level) {
         switch (level) {
             case "EASY":
@@ -114,7 +113,7 @@ class Board extends React.Component {
             if (this.reveled === 0) {
                 alert("Tu as gagné");
                 this.win += 1;
-                this._restartGame(event);
+                this.setState(this.baseState);
             }
 
             if (data === "true") {
@@ -196,6 +195,7 @@ class Board extends React.Component {
     _restartGame(event) {
         event.preventDefault();
         this.setState(this.baseState);
+        this.win = 0;
     }
 
     render() {
@@ -205,11 +205,13 @@ class Board extends React.Component {
             <div>
                 <h2> Welcome {this.props.users} </h2>
                 <p> Choose your level</p>
-                <select id="level">
-                    <option value="EASY">Easy - 5x5</option>
-                    <option value="MEDIUM">Medium - 8x8</option>
-                    <option value="HARD">Hard - 10x10</option>
-                </select>
+                {this.win === 0 &&
+                    <select id="level">
+                        <option value="EASY">Easy - 5x5</option>
+                        <option value="MEDIUM">Medium - 8x8</option>
+                        <option value="HARD">Hard - 10x10</option>
+                    </select>
+                }
                 <button onClick = {event => this._startGame(event)}>Start Game</button>
                 <button onClick = {event => this._restartGame(event)}>Restart</button>
                 {this._loadTimer()}

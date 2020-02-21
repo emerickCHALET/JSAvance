@@ -17,6 +17,9 @@ class Routing extends React.Component {
     render() {
         return (
             <Router>
+                <head>
+
+                </head>
                 <div>
                     <nav>
                         <ul>
@@ -36,6 +39,7 @@ class Routing extends React.Component {
                             </li>
                         </ul>
                     </nav>
+
 
                     {/* A <Switch> looks through its children <Route>s and
                         renders the first one that matches the current URL. */}
@@ -59,6 +63,21 @@ class Routing extends React.Component {
                             <Scoreboard />
                         </Route>
                     </Switch>
+                    <div className="area">
+                        <ul className="circles">
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+
                 </div>
             </Router>
         );

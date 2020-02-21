@@ -18,9 +18,10 @@ class Home extends React.Component {
 
     render() {
         return (
+
             <div>
-                <h2> Memory Game</h2>
-                
+                <h2 className="title"> Memory Game</h2>
+
                 <p> Enter your name: </p>
                 <form onSubmit = {event => this.addUser(event)} >
                     <input type="text"></input>
@@ -34,6 +35,8 @@ class Home extends React.Component {
                 <p>!!!Don't forgot to enter your Name!!!</p>
                 <p>Good Luck.</p>
             </div>
+
+
         );
     }
 }

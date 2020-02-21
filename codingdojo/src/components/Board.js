@@ -203,7 +203,7 @@ class Board extends React.Component {
         const {timers} = this.props;
         return (
             <div>
-                <h2> Welcome {this.props.users} </h2>
+                <h2 className="title"> Welcome {this.props.users} </h2>
                 <p> Choose your level</p>
                 {this.win === 0 &&
                     <select id="level">

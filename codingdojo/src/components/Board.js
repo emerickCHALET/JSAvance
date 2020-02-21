@@ -111,9 +111,9 @@ class Board extends React.Component {
             let data = event.target.getAttribute('data');
 
             if (this.reveled === 0) {
-                alert("Tu as gagné");
                 this.win += 1;
                 this.setState(this.baseState);
+                alert("Tu as gagné");
             }
 
             if (data === "true") {
@@ -126,8 +126,8 @@ class Board extends React.Component {
                 if(this.win > 0){
                     this.addScore();
                 }
-                alert("Tu as perdu");
                 this._restartGame(event);
+                alert("Tu as perdu");
             }
 
             event.target.setAttribute("clicked", "true");
